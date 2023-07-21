@@ -1,0 +1,78 @@
+.radial-progress {
+    position: relative;
+    width: 80px; /* Reduced width */
+    height: 80px; /* Reduced height */
+    border-radius: 50%;
+}
+
+.progress-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px; /* Reduced font size */
+    font-weight: bold;
+}
+
+.circle-text {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+
+
+
+.range-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.range {
+    width: 200px;
+    height: 4px;
+    -webkit-appearance: none;
+    border-radius: 2px;
+    background-color: #f2f2f2;
+    outline: none;
+    margin: 8px 0;
+}
+
+.range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #3182ce;
+    cursor: pointer;
+}
+
+.percentage-display {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Custom background colors */
+#range1 {
+    background-color: #2563eb;
+}
+
+#range2 {
+    background-color: #2563eb;
+}

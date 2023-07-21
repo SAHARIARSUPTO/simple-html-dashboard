@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chart.js Bar Chart - Stacked</title>
+    <style>
+        /* Adjust the size of the chart container */
+        #chartContainer {
+            width: 400px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chartContainer">
+        <canvas id="myBarChart"></canvas>
+    </div>
+
+    <script>
+        // Utils object with functions to generate random data and colors
+        const Utils = {
+            months: function ({ count }) {
+                const months = [];
+                for (let i = 0; i < count; i++) {
+                    months.push(`Month ${i + 1}`);
+                }
+                return months;
+            },
+            numbers: function ({ count, min, max }) {
+                return Array.from({ length: count }, () => this.rand(min, max));
+            },
+            rand: function (min, max) {
+                return Math.random() * (max - min) + min;
+            },
+            CHART_COLORS: {
+    red: 'rgba(0, 0, 255, 0.6)',
+    blue: 'rgba(0, 0, 255, 0.6)',
+    lightBlue: 'rgba(173, 216, 230, 0.6)', // Light Blue color with RGBA values
+    green: 'rgba(0, 0, 255, 0.6)',
+    orange: 'rgba(173, 216, 230, 0.6)',
+    purple: 'rgba(173, 216, 230, 0.6)',
+    yellow: 'rgba(0, 0, 255, 0.6)',
+    pink: 'rgba(173, 216, 230, 0.6)',
+    cyan: 'rgba(0, 255, 255, 0.6)',
+    brown: 'rgba(173, 216, 230, 0.6)',
+    magenta: 'rgba(255, 0, 255, 0.6)',
+    lime: 'rgba(173, 216, 230, 0.6))',
+},
+
+            getRandomColor: function () {
+                const colors = Object.values(this.CHART_COLORS);
+                return colors[Math.floor(Math.random() * colors.length)];
+            },
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Function to generate random positive values
+        const getRandomPositiveValue = (min, max) => {
+            return Math.random() * max + min;
+        };
+
+        // Sample data for the bar chart
+        const labels = [20, null, 25, null, 30, null, 35, null, 40, null, 60, null, 65];
+        const NUMBER_CFG = { count: labels.length, min: 0, max: 100 };
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                    label: '20 - 30',
+                    data: Utils.numbers(NUMBER_CFG),
+                    backgroundColor: [
+                        Utils.CHART_COLORS.red,
+                        Utils.CHART_COLORS.blue,
+                        Utils.CHART_COLORS.green,
+                    ],
+                },
+                {
+                    label: '25 - 40',
+                    data: Utils.numbers(NUMBER_CFG),
+                    backgroundColor: [
+                        Utils.CHART_COLORS.orange,
+                        Utils.CHART_COLORS.purple,
+                        Utils.CHART_COLORS.yellow,
+                    ],
+                },
+                {
+                    label: '30 - 50',
+                    data: Utils.numbers(NUMBER_CFG),
+                    backgroundColor: [
+                        Utils.CHART_COLORS.pink,
+                        Utils.CHART_COLORS.cyan,
+                        Utils.CHART_COLORS.brown,
+                    ],
+                },
+            ],
+        };
+
+        // Bar chart configuration options
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Chart.js Bar Chart - Stacked',
+                    },
+                },
+                responsive: true,
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: {
+                            drawOnChartArea: false,
+                            borderDash: [5, 5],
+                            color: 'gray',
+                        },
+                    },
+                    y: {
+                        stacked: true,
+                        ticks: {
+                            stepSize: 100,
+                        },
+                    },
+                },
+            },
+        };
+
+        // Get the canvas element
+        const ctx = document.getElementById('myBarChart').getContext('2d');
+
+        // Create the bar chart
+        const myBarChart = new Chart(ctx, config);
+    </script>
+</body>
+</html>
